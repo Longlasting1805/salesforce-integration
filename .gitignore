@@ -1,0 +1,7 @@
+node_modules
+tokens.json
+.env
+dist
+build
+.vite
+.DS_Store
