@@ -180,6 +180,15 @@ app.delete("/delete-lead/:id", async (req, res) => {
   }
 });
 
+app.get("/env-test", (req, res) => {
+res.json({
+hasClientId: !!process.env.SF_CLIENT_ID,
+hasSecret: !!process.env.SF_CLIENT_SECRET,
+loginUrl: process.env.SF_LOGIN_URL || null
+});
+});
+
+
 // ======================
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
