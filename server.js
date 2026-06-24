@@ -188,6 +188,15 @@ loginUrl: process.env.SF_LOGIN_URL || null
 });
 });
 
+app.get("/token-test", (req, res) => {
+res.json({
+hasAccessToken: !!accessToken,
+hasRefreshToken: !!refreshToken,
+hasInstanceUrl: !!instanceUrl
+});
+});
+
+
 
 // ======================
 app.listen(3000, () => {
