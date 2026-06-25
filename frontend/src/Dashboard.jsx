@@ -11,7 +11,7 @@ loadDashboard();
 
 const loadDashboard = async () => {
 try {
-const response = await fetch("http://localhost:3000/leads");
+const response = await fetch("https://salesforce-integration-l793.onrender.com/leads");
 const data = await response.json();
 
   if (data.success) {

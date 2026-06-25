@@ -3,7 +3,7 @@ import { ShieldCheck } from "lucide-react";
 export default function Login() {
 
     const login = () => {
-        window.location.href = "http://localhost:3000/login";
+        window.location.href =  "https://salesforce-integration-l793.onrender.com/login";
     };
 
     return (

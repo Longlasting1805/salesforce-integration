@@ -21,7 +21,7 @@ fetchLeads();
 
 const fetchLeads = async () => {
 try {
-const response = await fetch("http://localhost:3000/leads");
+const response = await fetch("https://salesforce-integration-l793.onrender.com/leads");
 const data = await response.json();
 
   if (data.success) {
@@ -35,7 +35,7 @@ const data = await response.json();
 
 const deleteLead = async (id) => {
 try {
-await fetch("http://localhost:3000/delete-lead/" + id, {
+await fetch("https://salesforce-integration-l793.onrender.com/delete-lead/" + id, {
 method: "DELETE"
 });
 
@@ -62,7 +62,7 @@ setEditForm({
 const saveEdit = async () => {
 try {
 const response = await fetch(
-"http://localhost:3000/update-lead/" + editingLead.Id,
+"https://salesforce-integration-l793.onrender.com/update-lead/" + editingLead.Id,
 {
 method: "PATCH",
 headers: {
