@@ -51,19 +51,17 @@ export default function Login() {
         <div className="min-h-screen flex items-center justify-center bg-gray-900">
             <div className="bg-white p-10 rounded-xl w-[380px]">
 
-                <div className="flex justify-center mb-4">
+                <div className="flex justify-center mb-4 mr-4">
                     <ShieldCheck size={40} />
                 </div>
 
-                <h1 className="text-3xl font-bold text-center mb-6">
-                  ⚡ProspectHub
+                <h1 className="text-3xl font-bold text-center mb-6 mr-4">
+                    ⚡ProspectHub
+                    
                 </h1>
 
-                Welcome back.
+                <h1 className="text-1xl font-sm text-center mb-6">Manage Every Prospect. Close More Deals.</h1>
 
-                Manage your prospects,track every lead,
-                and grow your business.
-                
                 <input
                     type="email"
                     placeholder="Email"
