@@ -4,6 +4,8 @@ const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+const Token = require("./models/Token");
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -13,6 +15,20 @@ app.use(cors());
 let accessToken = null;
 let refreshToken = null;
 let instanceUrl = null;
+
+async function loadTokens() {
+  const saved = await Token.findOne();
+
+  if (saved) {
+    accessToken = saved.accessToken;
+    refreshToken = saved.refreshToken;
+    instanceUrl = saved.instanceUrl;
+
+    console.log("✅ Salesforce tokens loaded from MongoDB");
+  } else {
+    console.log("⚠️ No Salesforce tokens found in MongoDB");
+  }
+}
 
 // ======================
 // LOGIN START
@@ -52,6 +68,14 @@ app.get("/callback", async (req, res) => {
     accessToken = response.data.access_token;
     refreshToken = response.data.refresh_token;
     instanceUrl = response.data.instance_url;
+
+    await Token.deleteMany({});
+
+    await Token.create({
+      accessToken,
+      refreshToken,
+      instanceUrl
+    });
 
     return res.redirect("http://localhost:5173/dashboard");
 
@@ -184,19 +208,19 @@ app.delete("/delete-lead/:id", async (req, res) => {
 });
 
 app.get("/env-test", (req, res) => {
-res.json({
-hasClientId: !!process.env.SF_CLIENT_ID,
-hasSecret: !!process.env.SF_CLIENT_SECRET,
-loginUrl: process.env.SF_LOGIN_URL || null
-});
+  res.json({
+    hasClientId: !!process.env.SF_CLIENT_ID,
+    hasSecret: !!process.env.SF_CLIENT_SECRET,
+    loginUrl: process.env.SF_LOGIN_URL || null
+  });
 });
 
 app.get("/token-test", (req, res) => {
-res.json({
-hasAccessToken: !!accessToken,
-hasRefreshToken: !!refreshToken,
-hasInstanceUrl: !!instanceUrl
-});
+  res.json({
+    hasAccessToken: !!accessToken,
+    hasRefreshToken: !!refreshToken,
+    hasInstanceUrl: !!instanceUrl
+  });
 });
 
 const bcrypt = require("bcryptjs");
@@ -252,8 +276,10 @@ app.post("/app-login", async (req, res) => {
 // ======================
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => {
+  .then(async () => {
     console.log("✅ MongoDB Connected");
+
+    await loadTokens();
 
     app.listen(3000, () => {
       console.log("🚀 Server running on port 3000");
