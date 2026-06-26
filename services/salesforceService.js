@@ -20,11 +20,22 @@ async function getAccessToken() {
     params
   );
 
-  await Token.updateOne({}, {
-    accessToken: res.data.access_token
-  });
+ await Token.updateOne(
+  {},
+  {
+    accessToken: res.data.access_token,
+    instanceUrl: tokenDoc.instanceUrl
+  }
+);
 
-  return res.data.access_token;
-}
+return {
+  accessToken: res.data.access_token,
+  instanceUrl: tokenDoc.instanceUrl
+};
+
+return {
+  accessToken: res.data.access_token,
+  instanceUrl: tokenDoc.instanceUrl
+};}
 
 module.exports = { getAccessToken };
