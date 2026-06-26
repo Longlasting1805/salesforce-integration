@@ -7,6 +7,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+
 let accessToken = null;
 let refreshToken = null;
 let instanceUrl = null;
@@ -194,6 +196,54 @@ hasAccessToken: !!accessToken,
 hasRefreshToken: !!refreshToken,
 hasInstanceUrl: !!instanceUrl
 });
+});
+
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const DEMO_USER = {
+  id: 1,
+  email: "recruiter@demo.com",
+  passwordHash: bcrypt.hashSync("recruiter123", 10)
+};
+
+app.post("/app-login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (email !== DEMO_USER.email) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid credentials"
+    });
+  }
+
+  const valid = await bcrypt.compare(
+    password,
+    DEMO_USER.passwordHash
+  );
+
+  if (!valid) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid credentials"
+    });
+  }
+
+  const token = jwt.sign(
+    {
+      id: DEMO_USER.id,
+      email: DEMO_USER.email
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "7d"
+    }
+  );
+
+  res.json({
+    success: true,
+    token
+  });
 });
 
 
