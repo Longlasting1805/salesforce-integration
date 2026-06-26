@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import CreateLead from "./CreateLead";
-import Leads from "./Leads";
-import Layout from "./Layout";
+import Login from "./Pages/Login";
+import Dashboard from "./Pages/Dashboard";
+import CreateLead from "./Pages/CreateLead";
+import Leads from "./Pages/Leads";
+import Layout from "./Components/Layout";
 
 export default function App() {
   return (
