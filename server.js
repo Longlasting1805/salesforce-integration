@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json());
@@ -249,6 +250,15 @@ app.post("/app-login", async (req, res) => {
 
 
 // ======================
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("✅ MongoDB Connected");
+
+    app.listen(3000, () => {
+      console.log("🚀 Server running on port 3000");
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err);
+  });
