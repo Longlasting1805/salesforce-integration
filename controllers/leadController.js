@@ -20,10 +20,13 @@ exports.getLeads = async (req, res) => {
 
         res.json({ success: true, records: response.data.records });
     } catch (err) {
-        console.error("Salesforce Error:", err.response?.data || err.message);
+        console.error("Status:", err.response?.status);
+        console.error("Salesforce Response:", JSON.stringify(err.response?.data, null, 2));
 
         res.status(500).json({
-            error: err.response?.data || err.message
+            status: err.response?.status,
+            salesforce: err.response?.data,
+            message: err.message
         });
     }
 };

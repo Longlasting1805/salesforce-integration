@@ -4,17 +4,22 @@ require("dotenv").config();
 
 const connectDB = require("./config/db");
 const leadRoutes = require("./routes/leadRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-// Connect to MongoDB
+// ⬇️ THIS MUST COME BEFORE ROUTES
+app.use(cors());
+app.use(express.json());
+
+// DB
 connectDB();
 
-app.use(express.json());
-app.use(cors());
-
+// Routes
+app.use("/", authRoutes);
 app.use("/", leadRoutes);
 
+// Start
 app.listen(3000, () => {
   console.log("🚀 Server running on port 3000");
 });
