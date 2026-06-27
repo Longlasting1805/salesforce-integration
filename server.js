@@ -19,6 +19,7 @@ connectDB();
 app.use("/", authRoutes);
 app.use("/", leadRoutes);
 
+
 // Start
 app.listen(3000, () => {
   console.log("🚀 Server running on port 3000");

@@ -3,6 +3,42 @@ const { getAccessToken } = require("../services/salesforceService");
 
 let instanceUrl = null; // we will improve later
 
+exports.createLead = async (req, res) => {
+  try {
+    const { accessToken, instanceUrl } = await getAccessToken();
+
+    const response = await axios.post(
+      `${instanceUrl}/services/data/v58.0/sobjects/Lead`,
+      {
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName,
+        Company: req.body.company,
+        Email: req.body.email,
+        Phone: req.body.phone
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    res.json({
+      success: true,
+      id: response.data.id
+    });
+
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+
+    res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message
+    });
+  }
+};
+
 exports.getLeads = async (req, res) => {
     try {
         const { accessToken, instanceUrl } = await getAccessToken();
