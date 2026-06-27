@@ -39,6 +39,36 @@ exports.createLead = async (req, res) => {
   }
 };
 
+exports.updateLead = async (req, res) => {
+  try {
+    const { accessToken, instanceUrl } = await getAccessToken();
+
+    await axios.patch(
+      `${instanceUrl}/services/data/v58.0/sobjects/Lead/${req.params.id}`,
+      req.body,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    res.json({
+      success: true,
+      message: "Lead updated successfully"
+    });
+
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+
+    res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message
+    });
+  }
+};
+
 exports.getLeads = async (req, res) => {
     try {
         const { accessToken, instanceUrl } = await getAccessToken();
@@ -65,4 +95,32 @@ exports.getLeads = async (req, res) => {
             message: err.message
         });
     }
+};
+
+exports.deleteLead = async (req, res) => {
+  try {
+    const { accessToken, instanceUrl } = await getAccessToken();
+
+    await axios.delete(
+      `${instanceUrl}/services/data/v58.0/sobjects/Lead/${req.params.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    );
+
+    res.json({
+      success: true,
+      message: "Lead deleted successfully"
+    });
+
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+
+    res.status(500).json({
+      success: false,
+      error: err.response?.data || err.message
+    });
+  }
 };
