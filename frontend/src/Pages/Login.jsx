@@ -5,8 +5,6 @@ import { ShieldCheck } from "lucide-react";
 export default function Login() {
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     const login = async () => {
         try {
@@ -16,12 +14,9 @@ export default function Login() {
                 {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({
-                        email,
-                        password,
-                    }),
+                    body: JSON.stringify({})
                 }
             );
 
@@ -61,34 +56,11 @@ export default function Login() {
 
                 <h1 className="text-1xl font-sm text-center mb-6">Manage Every Prospect. Close More Deals.</h1>
 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full border p-3 rounded mb-3"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="w-full border p-3 rounded mb-4"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-
                 <button
                     onClick={login}
-                    className="bg-blue-600 text-white px-6 py-3 rounded w-full"
-                >
-                    Login
+                    className="bg-blue-600 text-white px-6 py-3 rounded w-full">
+                    Continue to CRM
                 </button>
-
-                <div className="mt-6 text-sm bg-gray-100 p-3 rounded">
-                    <p className="font-semibold mb-2">Demo Account</p>
-                    <p>Email: recruiter@demo.com</p>
-                    <p>Password: recruiter123</p>
-                </div>
 
             </div>
         </div>
