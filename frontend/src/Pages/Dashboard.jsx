@@ -61,22 +61,40 @@ export default function Dashboard() {
     );
   }
 
-  return (
-    <div className="grid grid-cols-3 gap-6">
+ return (
+  <div className="min-h-screen bg-gray-100 p-4 sm:p-6">
+    <h1 className="text-2xl sm:text-3xl font-bold mb-6">
+      Dashboard
+    </h1>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-gray-500">Total Leads</h2>
-        <p className="text-4xl font-bold mt-2">{totalLeads}</p>
+        <h2 className="text-gray-500 text-sm sm:text-base">
+          Total Leads
+        </h2>
+        <p className="text-3xl sm:text-4xl font-bold mt-2">
+          {totalLeads}
+        </p>
       </div>
 
       <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-gray-500">New Leads</h2>
-        <p className="text-4xl font-bold mt-2">{newLeads}</p>
+        <h2 className="text-gray-500 text-sm sm:text-base">
+          New Leads
+        </h2>
+        <p className="text-3xl sm:text-4xl font-bold mt-2">
+          {newLeads}
+        </p>
       </div>
 
       <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-gray-500">Companies</h2>
-        <p className="text-4xl font-bold mt-2">{companies}</p>
+        <h2 className="text-gray-500 text-sm sm:text-base">
+          Companies
+        </h2>
+        <p className="text-3xl sm:text-4xl font-bold mt-2">
+          {companies}
+        </p>
       </div>
     </div>
-  );
-}
+  </div>
+)
+};
