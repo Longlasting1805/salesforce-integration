@@ -67,3 +67,26 @@ MongoDB is used to securely persist Salesforce authentication tokens.
 
 
 
+## Screenshots
+
+### Login Page
+
+![Login Page](screenshots/login.png)
+
+---
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### Leads Management
+
+![Leads Management](screenshots/leads.png)
+
+---
+
+### Create Lead
+
+![Create Lead](screenshots/create-lead.png)
