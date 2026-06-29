@@ -23,7 +23,7 @@ The application supports creating, viewing, updating and deleting leads directly
 * Salesforce REST API
 * Tailwind CSS
 * Render
-* Vercel
+* Netlify
 
 ## Features
 
