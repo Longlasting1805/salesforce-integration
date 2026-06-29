@@ -4,9 +4,14 @@ import { ShieldCheck } from "lucide-react";
 
 export default function Login() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
 
     const login = async () => {
+
+        if (loading) return;
+
+        setLoading(true);
         try {
             console.log("Sending login request...");
             const res = await fetch(
@@ -38,6 +43,10 @@ export default function Login() {
             } else {
                 alert("Unknown error");
             }
+
+        }
+        finally {
+            setLoading(false);
         }
 
     };
@@ -58,8 +67,9 @@ export default function Login() {
 
                 <button
                     onClick={login}
-                    className="bg-blue-600 text-white px-6 py-3 rounded w-full">
-                    Continue to CRM
+                    disabled={loading}
+                    className="bg-blue-600 text-white px-6 py-3 rounded w-full disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    {loading ? "Connecting..." : "Continue to CRM"}
                 </button>
 
             </div>
