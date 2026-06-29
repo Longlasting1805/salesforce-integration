@@ -37,3 +37,33 @@ The application supports creating, viewing, updating and deleting leads directly
 * MongoDB token persistence
 * Production deployment
 
+## Architecture
+
+```text
+React Frontend
+        │
+        ▼
+Node.js + Express API
+        │
+        ▼
+Salesforce REST API
+        │
+        ▼
+Salesforce CRM
+```
+
+MongoDB is used to securely persist Salesforce authentication tokens.
+
+## Skills Demonstrated
+
+* REST API Integration
+* Full-Stack Development
+* Salesforce CRM Development
+* OAuth Authentication
+* MongoDB Integration
+* Responsive UI Design
+* CRUD Operations
+* Production Deployment
+
+
+
